@@ -34,7 +34,7 @@ def pascal_triangle(n):
 
     elif n > 2:
         rem_rows = n - 2  # remaining lists to be appended to triangle
-        for i in range(rem_rows):  # rem_rows <= n:
+        for i in range(rem_rows):
             temp_list = []
             temp_list.append(1)  # constant starting value in pascal triangle
 
@@ -52,10 +52,5 @@ def pascal_triangle(n):
             triangle.append(temp_list)
             base_list = temp_list  # prep for next posdible iteration
 
-            """
-            if n == len(triangle):
-                break  # no of rows desired by user
-            """
 
-
-        return triangle
+    return triangle
