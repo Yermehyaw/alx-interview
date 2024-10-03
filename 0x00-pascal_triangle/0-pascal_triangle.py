@@ -40,7 +40,7 @@ def pascal_triangle(n):
 
             # Placing values in temp_list indexes
             idx = 1
-            bl_idx = 0;  # base list index
+            bl_idx = 0  # base list index
             while idx < n:
                 temp_list.append(base_list[bl_idx] + base_list[bl_idx + 1])
                 idx += 1
@@ -51,6 +51,5 @@ def pascal_triangle(n):
 
             triangle.append(temp_list)
             base_list = temp_list  # prep for next posdible iteration
-
 
     return triangle
