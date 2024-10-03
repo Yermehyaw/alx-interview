@@ -20,12 +20,13 @@ def pascal_triangle(n):
     if not isinstance(n, int) or n <= 0:
         return []
 
-    primary_list = [1]
-    if n == 1:
-        return primary_list
-
     triangle = []
+    primary_list = [1]
     triangle.append(primary_list)
+
+    if n == 1:
+        return triangle
+
     base_list = [1, 1]  # list which will be summed to get elem of sucsve rows
     triangle.append(base_list)
 
