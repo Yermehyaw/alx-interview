@@ -20,7 +20,7 @@ def pascal_triangle(n):
     if not isinstance(n, int) or n <= 0:
         return []
 
-    primary_list = [[1]]
+    primary_list = [1]
     if n == 1:
         return primary_list
 
@@ -34,19 +34,19 @@ def pascal_triangle(n):
 
     elif n > 2:
         rem_rows = n - 2  # remaining lists to be appended to triangle
-        for i in range(rem_rows) and rem_rows <= n:
+        for i in range(rem_rows):  # rem_rows <= n:
             temp_list = []
-            temp_list[0] = 1  # constant starting value in pascal triangle
+            temp_list.append(1)  # constant starting value in pascal triangle
 
             # Placing values in temp_list indexes
             idx = 1
             bl_idx = 0;  # base list index
             while idx < n:
-                temp_list[idx] = base_list[bl_idx] + base_list[bl_idx + 1]
+                temp_list.append(base_list[bl_idx] + base_list[bl_idx + 1])
                 idx += 1
                 bl_idx += 1
                 if idx == len(base_list):  # no number pair left in base_list
-                    temp_list[idx] = 1  # constant ending value
+                    temp_list.append(1)  # constant ending value
                     break  # new list/row has is completed
 
             triangle.append(temp_list)
