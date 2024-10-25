@@ -67,4 +67,4 @@ try:
                     print(f'{stat}: {code}')
 
 except (KeyboardInterrupt, BrokenPipeError, IOError, EOFError) as e:
-    pass
+    handler(None, None)
