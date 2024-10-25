@@ -23,7 +23,7 @@ def handler(sig: int, frm: Optional[FrameType]) -> None:
     sys.exit(0)
 
 
-signal.signal(signal.SIGINT, handler)  # hadle ctrl+c signals
+signal.signal(signal.SIGINT, handler)  # handle ctrl+c signals
 
 try:
     n = 0
