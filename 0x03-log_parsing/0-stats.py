@@ -38,11 +38,13 @@ try:
         '500': 0
     }
     total_size = 0
+    lines = sys.stdin.readlines()
 
-    for line in sys.stdin:
+    for line in lines:
         n += 1
         line_list = line.split()
 
+    try:
         len_line = len(line_list)
         if len_line == 9:
             size = int(line_list[8])
@@ -51,16 +53,17 @@ try:
             size = int(line_list[7])
             code = line_list[6]
 
-        try:
-            code = int(code)
-        except (ValueError, NameError):
-            code = None
+        code = int(code)
+
+    except (IndexError, ValueError, NameError):
+        code = None
+        size = 0
 
         total_size += size
         if code:
             stat_codes[str(code)] = stat_codes.get(str(code)) + 1
 
-        if n % 10 == 0:  # 10th-ish iteration e.g 10, 20, 30 etc
+        if n % 10 == 0 or len(lines) < 10:  # 10th-ish iteration e.g 10, 20, 30 etc
             print(f'File size: {total_size}')
             for stat, code in stat_codes.items():
                 if code > 0:  # if code is greater than 0
