@@ -18,51 +18,18 @@ def validUTF8(data):
     if not isinstance(data, list):
         return False
 
-    encoding = [
-        ['01000'],
-        ['11000', '10000'],
-        ['11100', '10000', '10000'],
-        ['11110', '10000', '10000', '10000']
-    ]
+    for byte in data:
+        byte_to_char = 0
 
-    try:
-        # convert to binary,remove the appended '0b' and fill up to 8 digits
-        # bin_chars = [bin(char)[2:].zfill(8) for char in data]
+        if byte_to_char > 0:
+            # Check for continuation bytes to complete a char
+            if byte >> 6 != 0b10:
+                return False
+            byte_to_char -= 1
 
-        bin_chars = [int(bin(char)) for char in data]
-    except TypeError:  # if elem is not an int
-        return False
-
-    # extract the first 5 bits from each 8 bits digits
-    # start_bit = [bin_val[:-3] for bin_val in bin_chars]
-
-    mask = [0b11111000, 0b11110000, 0b11100000, 0b11000000, 0b100000000]
-
-    print(bin_chars)
-
-    no_bits = len(start_bit)
-
-    i = 0
-    prefix = start_bit[i]
-    if prefix == '11110':
-        pass
-    elif prefix[:-1] == '1110':
-        print(f'prefix is: {prefix[:-1]}')
-        pass
-    elif prefix[:-2] == '110':
-        pass
-    elif prefix[:-3] == '01':
-        pass
-    else:  # prefix/lead byte cannot start with anything else e.g '10'
-        return False
-    #return True
-
-    # first verify the lead byte is valid
-    # if 4 byte, check next 3 consecutive bytes, if they begin with 10
-    # if 3 byte, check next 2 consecutive bytes, if they begin with 10
-    # if 2 bytes, check if next byte begins with 10
-    # otherwise check if it begins with 0,
-    # if none of ythe above conditions hold, return False as the encoding is corrupt
-
-if __name__ == '__main__':
-    validUTF8([229, 121, 116, 104, 111, 110, 32, 105, 115, 32, 99, 111, 111, 108, 33])
+        else:
+            # Check for lead byte
+            if byte >> 7 == 0:
+                byte_to_char = 0
+            elif byte >> 5 == 0b110:  # single-byte char
+                byte_to_char
