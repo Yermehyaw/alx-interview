@@ -15,7 +15,7 @@ def validUTF8(data):
     data(list): list of int(s) representing characters
 3
     """
-    if not isinstance(data, list):
+    if not isinstance(data, list) or len(data) == 0:
         return False
 
     count = 0
