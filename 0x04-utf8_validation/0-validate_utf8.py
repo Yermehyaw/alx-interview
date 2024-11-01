@@ -40,7 +40,8 @@ def validUTF8(data):
             elif byte >> 6 == 0b11:  # 2 byte char
                 count = 1
             elif byte >> 7 == 0b0:  # single byte char
-                count = 0
+                # count = 0
+                pass
             else:  # the above are the only acceptable lead bytes
                 return False
 
