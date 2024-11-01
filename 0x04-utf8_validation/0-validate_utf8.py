@@ -44,4 +44,4 @@ def validUTF8(data):
             else:  # the above are the only acceptable lead bytes
                 return False
 
-    return True
+    return count == 0
