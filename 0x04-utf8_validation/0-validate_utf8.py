@@ -26,10 +26,10 @@ def validUTF8(data):
 
         # Check for continuing bytes that follow a lead byte in making a char
         if count > 0:
-            if byte >> 6 != 0b10:
-                return False  # continuing bytes do not start with '10xxxxxx'
+            if byte >> 6 != 0b10 and byte >> 5 != 0b010:
+                return False  # continuing bytes must start with '10xxxxxx'
 
-            count -= 0
+            count -= 1
 
         # Check for lead bytes and adjust their corresponding count accprdingly
         else:
@@ -40,9 +40,12 @@ def validUTF8(data):
             elif byte >> 6 == 0b11:  # 2 byte char
                 count = 1
             elif byte >> 7 == 0b0:  # single byte char
-                # count = 0
-                pass
+                count = 0
             else:  # the above are the only acceptable lead bytes
                 return False
 
     return True
+
+if __name__ == '__main__':
+    print(validUTF8([240, 159, 152, 138,  226, 157, 164, 240, 159, 145, 141, 226, 155, 80, 226, 152, 128, 226, 156, 148]))
+
