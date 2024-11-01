@@ -21,7 +21,7 @@ def validUTF8(data):
     count = 0
 
     for byte in data:
-        if not isinstance(byte, int):
+        if not isinstance(byte, int) or byte < 0 or byte > 255:
             return False
 
         # Check for continuing bytes that follow a lead byte in making a char
