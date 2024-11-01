@@ -19,17 +19,33 @@ def validUTF8(data):
         return False
 
     for byte in data:
-        byte_to_char = 0
+        if not isinstance(byte, int):
+            return False
 
-        if byte_to_char > 0:
-            # Check for continuation bytes to complete a char
+        count = 0
+
+        # Check for continuing bytes that follow a lead byte in making a char
+        if count > 0:
             if byte >> 6 != 0b10:
-                return False
-            byte_to_char -= 1
+                return False  # continuing bytes do not start with '10xxxxxx'
 
+            count -= 0
+
+        # Check for lead bytes and adjust their corresponding count accprdingly
         else:
-            # Check for lead byte
-            if byte >> 7 == 0:
-                byte_to_char = 0
-            elif byte >> 5 == 0b110:  # single-byte char
-                byte_to_char
+            if byte >> 4 == 0b1111:  # 4 byte char
+                count = 3
+            elif byte >> 5 == 0b111:  # 3 byte char
+                count = 2
+            elif byte >> 6 == 0b11:  # 2 byte char
+                count = 1
+            elif byte >> 7 == 0b0:  # single byte char
+                count = 0
+            else:  # the above are the only acceptable lead bytes
+                return False
+
+    return True
+
+
+if __name__ == '__main__':
+    print(validUTF8([240, 159, 152, 138]))
