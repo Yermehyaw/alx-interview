@@ -18,11 +18,11 @@ def validUTF8(data):
     if not isinstance(data, list):
         return False
 
+    count = 0
+
     for byte in data:
         if not isinstance(byte, int):
             return False
-
-        count = 0
 
         # Check for continuing bytes that follow a lead byte in making a char
         if count > 0:
