@@ -45,7 +45,3 @@ def validUTF8(data):
                 return False
 
     return True
-
-
-if __name__ == '__main__':
-    print(validUTF8([240, 159, 152, 138]))
