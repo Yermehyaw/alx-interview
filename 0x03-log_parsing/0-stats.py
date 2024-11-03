@@ -57,7 +57,7 @@ try:
                 code = int(line_list[6])
 
         except (IndexError, ValueError, NameError):
-            code = 0
+            code = None
             size = 0
 
         total_size += size
