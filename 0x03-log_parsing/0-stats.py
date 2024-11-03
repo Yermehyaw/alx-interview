@@ -30,6 +30,7 @@ total_size = 0
 
 signal_received = False  # flag to prevent reentrant code
 
+
 def handler(sig: int, frm: Optional[FrameType]) -> None:
     """Handles Ctrl + C signals"""
     global signal_received
@@ -61,7 +62,10 @@ try:
 
         total_size += size
         if code:
-            stat_codes[str(code)] = stat_codes.get(str(code)) + 1  # excpts auto handled
+            try:
+                stat_codes[str(code)] += 1
+            except (KeyError):
+                pass
 
         if n % 10 == 0:  # 10th-ish iteration e.g 10, 20, 30 etc
             print(f'File size: {total_size}')
