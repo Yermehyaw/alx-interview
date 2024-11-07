@@ -13,60 +13,43 @@ if len(sys.argv) != 2:
     print('Usage: nqueens N')
     sys.exit(1)
 
-arg = sys.argv[1]
+n = sys.argv[1]
 
 try:
-    arg = int(arg)
+    n = int(n)
 except ValueError:
     print('N must be a number')
     sys.exit(1)
 
-if arg < 4:
+if n < 4:
     print('N must be at least 4')
     sys.exit(1)
 
-n = arg
-all_placement = []
-possible_placement = []
-# populate list with all chesss positions
-for row in range(n):
-    for col in range(n):
-        possible_placement.append([row, col])
 
-
-def nqueens(n):
+def nqueens(n, all_placement=[]):
     """nqueens solution using backtracking and recursion"""
-    global possible_placement
-    global all_placement
-
-    if n == 1:
+    if len(all_placement) == n:
+        print(all_placement)
         return
 
-    n -= 1
+    for col in range(n):
+        row = len(all_placement)
+        placement = [row, col]
 
-    for placement in possible_placement:
-        # print(placement)
-        if not valid_placement(placement, all_placement):
-            #print(n)
-            continue
-        all_placement.append(placement)
-        print(all_placement)
-        nqueens(n)
-        if all_placement:
-            print(all_placement)
+        if valid_placement(placement, all_placement):
+            all_placement.append(placement)
+            nqueens(n, all_placement)  # recursion
+            all_placement.pop()  # backtracking
 
 
 def valid_placement(placement, all_placement):
     """Checks if the placement of a queen is valid"""
     for queen in all_placement:
-        if placement[1] == queen[1]:  # same column
-            return False
-        elif placement[0] == queen[0]:  # same row
+        # same row or col
+        if placement[1] == queen[1] or placement[0] == queen[0]:
             return False
         # diagonals
-        elif placement[0] - placement[1] == queen[0] - queen[1]:
-            return False
-        elif sum(placement) == sum(queen):
+        elif abs(placement[0] - queen[0]) == abs(placement[1] - queen[1]):
             return False
 
     return True
