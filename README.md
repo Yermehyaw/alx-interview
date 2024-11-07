@@ -12,3 +12,7 @@ Parsing an input stream
 
 ## python - utf-8 validation
 Validating characters to verify if theyre encoded in utf-8
+
+
+## python - nqueens
+Nqueens problem solved by backtracking and recursion
