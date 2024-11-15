@@ -16,3 +16,7 @@ Validating characters to verify if theyre encoded in utf-8
 
 ## python - nqueens
 Nqueens problem solved by backtracking and recursion
+
+
+## javascript - star-wars api
+Retrieving data from the Star Wars API in JS using the request module
