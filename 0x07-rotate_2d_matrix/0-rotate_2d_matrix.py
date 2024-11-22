@@ -8,17 +8,16 @@ Modules imported: None
 
 
 def rotate_2d_matrix(matrix):
-    """Rotates a 2d matrix without returning a new copy of the matrix
+    """Rotates a n * n  matrix without returning a new copy of the matrix
     """
+    # transpose the matrix
+    n = len(matrix)
+    for i in range(n):
+        for j in range(i + 1, n):
+            temp = matrix[i][j]
+            matrix[i][j] = matrix[j][i]
+            matrix[j][i] = temp
+
     # reverse each row in the matrix
     for row in matrix:
-        i = 0
-        j = len(row) - 1
-        while j != i:
-            temp = row[j]
-            row[j] = row[i]
-            row[i] = temp
-            j -= 1
-            i += 1
-
-    # transpose the matrix
+        row.reverse()
