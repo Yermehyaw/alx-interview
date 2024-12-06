@@ -46,6 +46,7 @@ try:
     for line in sys.stdin:
         n += 1
         line_list = line.split()
+        print(line_list)
 
         try:
             len_line = len(line_list)
