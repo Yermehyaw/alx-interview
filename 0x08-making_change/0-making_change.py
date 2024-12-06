@@ -9,9 +9,8 @@ maths.min
 
 
 def makeChange(coins, total):
-    """Making change using arbitrary coin denominations
+    """Returns the least no of change for total using denominations in coins
     """
     if not coins or total <= 0:
         return 0
 
-    

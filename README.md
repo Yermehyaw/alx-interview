@@ -25,6 +25,5 @@ Retrieving data from the Star Wars API in JS using the request module
 ## python  rotate_2d_matrix
 Rotating a 2d matrix clockwisely in-place qith 0(1) storage complexity
 
-
 ## python - making_change
 Finding the least no of arbitrary denominations required to make change for a certain amount
